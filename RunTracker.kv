@@ -1,0 +1,140 @@
+#: kivy 1.0.9
+
+RunTrackerRoot:
+<RunTrackerRoot>:
+    SideChooser
+
+<SideChooser>:
+    BoxLayout:
+        orientation: "vertical"
+        #height: "400dp"
+        width: "40dp"
+        Button:
+            text: "Corporation"
+            size_hint_y: 1
+            on_press: app.root.show_game_form(self.text)
+        Button:
+            text: "Runner"
+            size_hint_y: 1
+            on_press: app.root.show_game_form(self.text)
+
+<GameForm>:
+    opponent_name_prop: opponent_name
+    opponent_id_prop: opponent_id
+    side_prop: side
+    personal_id_prop: personal_id
+    deck_name_prop: deck_name
+    agenda_points_prop: agenda_points
+    outcome_win_prop: outcome_win
+    outcome_loss_prop: outcome_loss
+    outcome_tie_prop: outcome_tie
+    flatline_checkbox_prop: flatline_checkbox
+    agenda_checkbox_prop: agenda_checkbox
+    BoxLayout:
+        orientation: 'vertical'
+        background_color: 1, 1, 1, 1
+        BoxLayout:
+            Label:
+                text: 'Side'
+                size_hint_x: 1
+            Spinner:
+                size_hint_x: 4
+                id: side
+                text: 'Runner'
+                values: ('Corporation', 'Runner')
+        BoxLayout:
+            Label:
+                text: 'Personal Id'
+                size_hint_x: 1
+            Spinner:
+                id: personal_id
+                size_hint_x: 4
+                #text: 'Kate'
+                #values: ('Kate', 'Gabe', 'Noise')
+        BoxLayout:
+            Label:
+                text: 'Opponent'
+                size_hint_x: 1
+            TextInput:
+                size_hint_x: 4
+                id: opponent_name
+        BoxLayout:
+            Label:
+                text: 'Opponent Id'
+                size_hint_x: 1
+            Spinner:
+                size_hint_x: 4
+                id: opponent_id
+                #text: 'test1'
+                #values: ('test1', 'test2')
+        BoxLayout:
+            Label:
+                text: 'Deck'
+                size_hint_x: 1
+            Spinner:
+                size_hint_x: 4
+                id: deck_name
+                text: 'deck1'
+                values: ('deck1', 'deck2')
+        BoxLayout:
+            Label:
+                text:'Agenda\n Points'
+                size_hint_x: 1
+            Slider:
+                size_hint_x: 4
+                id: agenda_points
+                range: (0, 10)
+                value_track: True
+                value_track_color: [0, 25, 255, 1]
+            Label:
+                size_hint_x: .5
+                id: agenda_points_slider_display
+                text: '%s' % int(agenda_points.value)
+        BoxLayout:
+            Label:
+                text: 'Outcome'
+                size_hint_x: 1
+            CheckBox:
+                id: outcome_win
+                active: True
+                size_hint_x: 1
+                group: 'outcome'
+            Label:
+                text: 'Win'
+            CheckBox:
+                id: outcome_loss
+                size_hint_x: 1
+                group: 'outcome'
+            Label:
+                text: 'Lose'
+            CheckBox:
+                id: outcome_tie
+                size_hint_x: 1
+                group: 'outcome'
+            Label:
+                text: 'Tie'
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Flatline'
+                size_hint_x: 1
+            CheckBox:
+                group: 'win_how'
+                id: flatline_checkbox
+                size_hint_x: 2
+            Label:
+                text: 'Agenda'
+                size_hint_x: 2
+            CheckBox:
+                group: 'win_how'
+                id: agenda_checkbox
+                size_hint_x: 1
+        BoxLayout:
+            Button:
+                text: 'Submit'
+                id: submit_button
+                on_press: root.submit_form()
+            Button:
+                text: 'Clear'
+                id: clear_button
+
